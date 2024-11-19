@@ -1,0 +1,30 @@
+<section class="movie-section">
+  <div class="container">
+    <h2 class="section-title">Top Rated Movies</h2>
+    <div class="row g-4">
+      @for (movie of movies; track $index) {
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm h-100">
+          <img
+            [src]="
+              'https://image.tmdb.org/t/p/w500' + (movie.backdrop_path || '')
+            "
+            class="card-img-top"
+            alt="{{ movie.title }}"
+            onerror="this.src='https://via.placeholder.com/300x200?text=No+Image';"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">
+              {{ movie.overview.split(" ", 7).join(" ") }}...
+            </p>
+          </div>
+          <div class="card-footer">
+            <span class="vote-badge">⭐ {{ movie.vote_average }}</span>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

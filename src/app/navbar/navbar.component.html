@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="home">
+      <i class="fas fa-store"></i> My E-Commerce
+    </a>
+    <ul class="navbar-menu">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="productlist" routerLinkActive="active">
+          Product List
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="newproducts" routerLinkActive="active">
+          New Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="category" routerLinkActive="active">
+          Category
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="post" routerLinkActive="active">
+          post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="movies" routerLinkActive="active">
+          Movies
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="login" routerLinkActive="active">
+          login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="auth.logout()" routerLinkActive="active">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

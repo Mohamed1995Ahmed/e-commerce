@@ -1,0 +1,113 @@
+/* Footer Styling */
+.footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 1.5rem 1rem; /* Reduced padding */
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Reduced gap between sections */
+  justify-content: space-between;
+  margin-bottom: 1.5rem; /* Reduced margin */
+}
+
+/* Footer About Section */
+.footer-about h4 {
+  margin-bottom: 0.8rem; /* Reduced spacing */
+}
+
+.footer-about p {
+  font-size: 0.85rem; /* Reduced font size */
+  line-height: 1.4;
+}
+
+/* Footer Links Section */
+.footer-links h4 {
+  margin-bottom: 0.8rem; /* Reduced spacing */
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.4rem; /* Reduced spacing */
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #f8f9fa;
+  font-size: 0.85rem; /* Reduced font size */
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #007bff;
+}
+
+/* Footer Contact Section */
+.footer-contact h4 {
+  margin-bottom: 0.8rem; /* Reduced spacing */
+}
+
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-contact li {
+  margin-bottom: 0.4rem; /* Reduced spacing */
+  font-size: 0.85rem; /* Reduced font size */
+}
+
+.footer-contact i {
+  margin-right: 0.5rem;
+  color: #007bff;
+}
+
+/* Footer Social Media Section */
+.footer-social h4 {
+  margin-bottom: 0.8rem; /* Reduced spacing */
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.8rem; /* Reduced gap between icons */
+}
+
+.social-icons a {
+  color: #f8f9fa;
+  font-size: 1.2rem; /* Reduced icon size */
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+  text-align: center;
+  font-size: 0.8rem; /* Reduced font size */
+  border-top: 1px solid #495057;
+  padding-top: 0.8rem; /* Reduced padding */
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+  }
+}

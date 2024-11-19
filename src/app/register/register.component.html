@@ -1,0 +1,108 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  <div>
+    <label for="firstName">First Name</label>
+    <input id="firstName" formControlName="firstName" type="text" />
+    @if(registerForm.get('firstName')?.errors && (
+    registerForm.get('firstName')?.touched)||registerForm.get('firstName')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(registerForm.get('firstName')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      } @else if (registerForm.get('firstName')?.getError('minLength')){
+      <p class="m-0">min length is 4</p>
+      } @else if(registerForm.get('firstName')?.getError('maxLength') ){
+      <p class="m-0">max length is 16</p>
+      }
+    </div>
+
+    }
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input id="lastName" formControlName="lastName" type="text" />
+    @if(registerForm.get('lastName')?.errors && (
+    registerForm.get('lastName')?.touched)||registerForm.get('lastName')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(registerForm.get('lastName')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      } @else if (registerForm.get('lastName')?.getError('minLength')){
+      <p class="m-0">min length is 4</p>
+      } @else if(registerForm.get('lastName')?.getError('maxLength') ){
+      <p class="m-0">max length is 16</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <div>
+    <label for="userName">User Name</label>
+    <input id="userName" formControlName="userName" type="text" />
+    @if(registerForm.get('userName')?.errors && (
+    registerForm.get('userName')?.touched)||registerForm.get('userName')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(registerForm.get('userName')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      } @else if (registerForm.get('userName')?.getError('minLength')){
+      <p class="m-0">min length is 4</p>
+      } @else if(registerForm.get('userName')?.getError('maxLength') ){
+      <p class="m-0">max length is 16</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" />
+    <small
+      *ngIf="
+        registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+      "
+    >
+      Please enter a valid email address.
+    </small>
+  </div>
+
+  <div>
+    <label for="password">password</label>
+    <input id="password" formControlName="password" type="text" />
+    @if(registerForm.get('password')?.errors && (
+    registerForm.get('password')?.touched)||registerForm.get('password')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(registerForm.get('password')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <div>
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      type="password"
+    />
+    <small
+      *ngIf="
+        registerForm.hasError('mismatch') &&
+        registerForm.get('confirmPassword')?.touched
+      "
+    >
+      Passwords must match.
+    </small>
+  </div>
+
+  <div>
+    <label for="role">Role</label>
+    <select id="role" formControlName="role">
+      <option value="Developer">Developer</option>
+      <option value="Mentor">Mentor</option>
+      <option value="HR">HR</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>

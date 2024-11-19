@@ -1,0 +1,30 @@
+<!-- Featured Products -->
+<div class="container my-2 p-5 border border-4 bg-sucess">
+  <h2 class="my-4">Featured Products</h2>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let product of featuredProducts">
+      <div class="card m-5">
+        <img
+          [src]="product.imageUrl"
+          class="card-img-top"
+          alt="Product Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">${{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h1 appAdd1 class="bg-danger text-warning text-center">Recommand product</h1>
+
+  <app-reco-product></app-reco-product>
+</div>
+<button #click>click</button>
+
+<h2 #asd>my name is mohamed</h2>
+<button (click)="shows()">clickme</button>
+<app-reco-product (items)="action1 = $event"></app-reco-product>
+<h3>{{ action1 }}</h3>

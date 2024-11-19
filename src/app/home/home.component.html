@@ -1,0 +1,101 @@
+<div class="container my-4">
+  <!-- Banners -->
+  <div class="row mb-4">
+    <div class="col-12 col-md-6">
+      <a [routerLink]="banners[0].link">
+        <img
+          [src]="banners[0].imageUrl"
+          class="img-fluid rounded w-75"
+          alt="Banner 1"
+        />
+      </a>
+    </div>
+    <div class="col-12 col-md-6">
+      <a [routerLink]="banners[1].link">
+        <img
+          [src]="banners[1].imageUrl"
+          class="img-fluid rounded w-100"
+          alt="Banner 2"
+        />
+      </a>
+    </div>
+  </div>
+
+  <!-- Featured Products -->
+  <h2 class="my-4">Featured Products</h2>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let product of featuredProducts">
+      <div class="card">
+        <img
+          [src]="product.imageUrl"
+          class="card-img-top"
+          alt="Product Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">${{ product.price }}</p>
+          <div class="stars">
+            <ng-container *ngFor="let star of [].constructor(product.stars)">
+              <span>⭐</span>
+            </ng-container>
+          </div>
+          <a [routerLink]="'/product/' + product.id" class="btn btn-primary"
+            >View Product</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <h2 class="my-4">Shop by Categories</h2>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let category of categories">
+      <div class="card">
+        <a [routerLink]="category.link">
+          <img
+            [src]="category.imageUrl"
+            class="card-img-top w-100"
+            alt="Category Image"
+          />
+        </a>
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ category.name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand brand-highlight" routerLink="productlist">
+      <i class="fas fa-store"></i>
+      <!-- Font Awesome icon -->
+      Product
+    </a>
+    <!-- Other navbar content like links or search can go here -->
+  </div>
+  <div class="container">
+    <a class="navbar-brand brand-highlight" routerLink="newproducts">
+      <i class="fas fa-store"></i>
+      <!-- Font Awesome icon -->
+      New Products
+    </a>
+    <a class="navbar-brand brand-highlight" routerLink="category">
+      <i class="fas fa-store"></i>
+      <!-- Font Awesome icon -->
+      CAtegory
+    </a>
+    <!-- Other navbar content like links or search can go here -->
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+@for (item of items; track $index) {
+<ul>
+  <li>{{ item }}</li>
+</ul>
+}

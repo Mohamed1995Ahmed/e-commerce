@@ -1,0 +1,95 @@
+<section>
+  <div class="row g-0">
+    <div class="col-md-10">
+      <div>
+        <owl-carousel-o [options]="categoryoption1">
+          <ng-template carouselSlide>
+            <img src="/Screenshot (39).png" class="w-100" height="300px" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="/Screenshot (21).png" class="w-100" height="300px" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="/Screenshot (22).png" class="w-100" height="300px" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="/Screenshot (23).png" class="w-100" height="300px" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="/Screenshot (24).png" class="w-100" height="300px" />
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div>
+        <img src="/Screenshot (40).png" class="w-100" height="150px" />
+        <img src="/Screenshot (41).png" class="w-100" height="150px" />
+      </div>
+    </div>
+  </div>
+</section>
+<section class="m-2">
+  <h1>Popular category</h1>
+  <owl-carousel-o [options]="categoryoption">
+    @for (cat of categoriesList; track cat._id) {
+    <ng-template carouselSlide>
+      <div>
+        <img [src]="cat.image" alt="cat.name" height="250px" class="w-75" />
+        <h5 class="h6 text-main">{{ cat.name }}</h5>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+  <div>Some tags after</div>
+</section>
+<section>
+  <div class="product-list">
+    <div class="product-item" *ngFor="let product of productlist1">
+      <div [routerLink]="['/productdetails', product._id]">
+        <div class="product-image">
+          <img [src]="product.imageCover" class="h-50" [alt]="product.title" />
+        </div>
+        <div class="product-details">
+          <h3>{{ product.title }}</h3>
+          <p class="product-description">
+            {{ product.description.split(" ", 6).join(" ") }}
+          </p>
+          <div class="product-meta">
+            <span class="product-price">Price: ${{ product.price }}</span>
+            <span class="product-quantity"
+              >In Stock: {{ product.quantity }}</span
+            >
+            <span class="product-sold">Sold: {{ product.sold }}</span>
+            <span class="product-rating"
+              >Rating: {{ product.ratingsAverage }} ({{
+                product.ratingsQuantity
+              }}
+              reviews)</span
+            >
+          </div>
+          <div class="product-category">
+            <strong>Category:</strong> {{ product.category.name }}
+          </div>
+          <div class="product-brand">
+            <strong>Brand:</strong> {{ product.brand.name }}
+          </div>
+          <div class="product-subcategories">
+            <strong>Subcategories:</strong>
+            <ul>
+              <li *ngFor="let sub of product.subcategory">{{ sub.name }}</li>
+            </ul>
+          </div>
+          <div class="product-timestamp">
+            <small>Created: {{ product.createdAt | date : "medium" }}</small
+            ><br />
+            <small>Updated: {{ product.updatedAt | date : "medium" }}</small>
+          </div>
+        </div>
+        <div class="text-center product-card">
+          <button class="btn-primary rounded-3 w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

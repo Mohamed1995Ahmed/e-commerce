@@ -1,0 +1,35 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="register-form">
+  <div>
+    <label for="LoginMethod">User Name</label>
+    <input id="LoginMethod" formControlName="LoginMethod" type="text" />
+    @if(loginForm.get('LoginMethod')?.errors && (
+    loginForm.get('LoginMethod')?.touched)||loginForm.get('LoginMethod')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(loginForm.get('LoginMethod')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      } @else if (loginForm.get('LoginMethod')?.getError('minLength')){
+      <p class="m-0">min length is 4</p>
+      } @else if(loginForm.get('LoginMethod')?.getError('maxLength') ){
+      <p class="m-0">max length is 16</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <div>
+    <label for="password">password</label>
+    <input id="password" formControlName="password" type="text" />
+    @if(loginForm.get('password')?.errors && (
+    loginForm.get('password')?.touched)||loginForm.get('password')?.dirty){
+    <div class="alert alert-danger w-50">
+      @if(loginForm.get('password')?.getError('required')){
+      <p class="m-0">required NAME</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <button type="submit">Register</button>
+</form>

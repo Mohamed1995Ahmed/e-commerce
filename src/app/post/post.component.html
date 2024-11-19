@@ -1,0 +1,16 @@
+<div class="posts-container">
+  <h1 class="title">Blog Posts</h1>
+
+  @for (post of posts; track $index) {
+  <div class="post-card">
+    <div class="post-header">
+      <span class="post-id">Post ID: {{ post.id }}</span>
+      <span class="post-user">User ID: {{ post.userId }}</span>
+    </div>
+
+    <h2 class="post-title">{{ post.title }}</h2>
+    <p class="post-body">{{ post.body }}</p>
+  </div>
+
+  }
+</div>

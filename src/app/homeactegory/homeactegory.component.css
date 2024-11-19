@@ -1,0 +1,113 @@
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.card-img-top:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-footer {
+  background: #f8f9fa;
+}
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+.product-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-details {
+  padding: 15px;
+}
+
+.product-details h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.product-meta {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.product-meta span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.product-category,
+.product-brand {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.product-subcategories ul {
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.product-timestamp {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 10px;
+}
+.product-item {
+  position: relative; /* Ensure the hover effect works for child elements */
+}
+
+.product-card {
+  opacity: 0; /* Hide the button by default */
+  position: absolute;
+  bottom: 10px; /* Position the button near the bottom */
+  left: 0;
+  right: 0;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for appearing/disappearing */
+}
+
+.product-item:hover .product-card {
+  opacity: 1; /* Show the button when hovering over the product item */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
