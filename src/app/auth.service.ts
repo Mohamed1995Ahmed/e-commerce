@@ -14,12 +14,18 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   setregister(data: object): Observable<any> {
-    return this.http.post('http://localhost:5164/api/Account/Register', data);
+    return this.http.post(
+      'https://ecommerce.routemisr.com/api/v1/auth/signup',
+      data
+    );
   }
 
   // Function to send login data to the backend API
   setlogin(data: object): Observable<any> {
-    return this.http.post('http://localhost:5164/api/Account/Login', data);
+    return this.http.post(
+      'https://ecommerce.routemisr.com/api/v1/auth/signin',
+      data
+    );
   }
 
   setToken(token: string): void {

@@ -1,1 +1,71 @@
-<p>productdetails works!</p>
+@if(productlist){
+<div class="container">
+  <div class="row">
+    <!-- Product Image Column -->
+    <div class="col-md-3 text-center">
+      <div class="product-image">
+        <img
+          [src]="productlist?.imageCover"
+          class="img-fluid"
+          [alt]="productlist?.title"
+        />
+      </div>
+    </div>
+
+    <!-- Product Details Column -->
+    <div class="col-md-9">
+      <div class="productlist-details">
+        <h3>{{ productlist?.title }}</h3>
+        <p class="productlist-description">
+          {{ productlist?.description?.split(" ", 6)?.join(" ") }}
+        </p>
+
+        <!-- Product Meta Information -->
+        <div class="productlist-meta">
+          <span class="productlist-price"
+            >Price: ${{ productlist?.price }}</span
+          >
+          <span class="productlist-quantity"
+            >In Stock: {{ productlist?.quantity }}</span
+          >
+          <span class="productlist-sold">Sold: {{ productlist?.sold }}</span>
+          <span class="productlist-rating">
+            Rating: {{ productlist?.ratingsAverage }} ({{
+              productlist?.ratingsQuantity
+            }}
+            reviews)
+          </span>
+        </div>
+
+        <!-- Category and Brand Information -->
+        <div class="productlist-category">
+          <strong>Category:</strong> {{ productlist?.category?.name }}
+        </div>
+        <div class="productlist-brand">
+          <strong>Brand:</strong> {{ productlist?.brand?.name }}
+        </div>
+
+        <!-- Subcategories List -->
+        <div class="productlist-subcategories">
+          <strong>Subcategories:</strong>
+          <ul>
+            <li *ngFor="let sub of productlist?.subcategory">{{ sub.name }}</li>
+          </ul>
+        </div>
+
+        <!-- Timestamps -->
+        <div class="productlist-timestamp">
+          <small>Created: {{ productlist?.createdAt }}</small
+          ><br />
+          <small>Updated: {{ productlist?.updatedAt }}</small>
+        </div>
+      </div>
+
+      <!-- Add to Cart Button -->
+      <div class="text-center productlist-card mt-4">
+        <button class="btn btn-primary rounded-3 w-100">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+}

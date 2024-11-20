@@ -1,0 +1,79 @@
+/* Ensures that the product image fills the height of the container */
+.product-image {
+  height: 100%; /* Ensure the container stretches fully */
+}
+
+.product-image img {
+  width: 100%; /* Make image take the full width of the container */
+  height: 100%; /* Make image take the full height */
+  object-fit: cover; /* Ensure image covers the area without distortion */
+  border-radius: 8px; /* Optional: add rounded corners to the image */
+}
+
+/* Style for product details section */
+.productlist-details h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.productlist-description {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.productlist-meta span {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.productlist-price {
+  color: #ff5733; /* Custom color for price */
+  font-size: 1.3rem;
+}
+
+.productlist-quantity,
+.productlist-sold {
+  color: #777;
+}
+
+.productlist-rating {
+  font-weight: bold;
+}
+
+.productlist-category,
+.productlist-brand,
+.productlist-subcategories {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.productlist-timestamp {
+  margin-top: 20px;
+}
+
+.productlist-card button {
+  background-color: #28a745;
+  border: none;
+  padding: 12px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 40px; /* Lower the button further */
+}
+
+.productlist-card button:hover {
+  background-color: #218838;
+}
+
+/* Footer styling */
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer p {
+  margin: 0;
+}

@@ -2,49 +2,31 @@ import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   registerForm: FormGroup = this.fb.group(
     {
-      firstName: [
+      name: [
         null,
         [
           Validators.required,
           Validators.minLength(4),
-          Validators.maxLength(15),
-        ],
-      ],
-      lastName: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(15),
-        ],
-      ],
-      userName: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(15),
+          Validators.maxLength(50),
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
@@ -56,21 +38,25 @@ export class RegisterComponent {
           Validators.maxLength(10),
         ],
       ],
-      confirmPassword: [null, [Validators.required]],
-      role: new FormControl('eveloper'), // Default value as 'eveloper'
+      rePassword: [null, [Validators.required]],
+      phone: [
+        null,
+        [
+          Validators.required, // Validation for 11-digit phone number
+          Validators.pattern(/^01[0-9]{9}$/), // Example: phone number pattern for Egyptian numbers
+        ],
+      ],
     },
     { validators: this.passwordMatchValidator }
   );
 
   constructor(private _auth: AuthService) {}
 
-  ngOnInit(): void {}
-
-  // Custom validator to check if password and confirmPassword match
+  // Custom validator to check if password and rePassword match
   passwordMatchValidator(form: AbstractControl) {
     const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { mismatch: true };
+    const rePassword = form.get('rePassword')?.value;
+    return password === rePassword ? null : { mismatch: true };
   }
 
   // Submit the form
@@ -79,8 +65,8 @@ export class RegisterComponent {
       this._auth.setregister(this.registerForm.value).subscribe({
         next: (res) => {
           console.log('Registration successful:', res);
-          if (res.Message === 'Login Successfully') {
-            console.log('Success condition met.');
+          if (res.message === 'success') {
+            console.log('success');
             this.router.navigate(['/login']);
           } else {
             console.error('Unexpected response message:', res.Message);
@@ -88,6 +74,10 @@ export class RegisterComponent {
         },
         error: (err) => {
           console.error('Registration failed:', err);
+          // Log the error details for further investigation
+          if (err.status === 409) {
+            console.error('Conflict error:', err.error);
+          }
         },
       });
     } else {

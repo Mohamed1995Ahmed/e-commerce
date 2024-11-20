@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import Cookies from 'js-cookie'; // Correct import
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-login',
@@ -20,44 +20,37 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
 
-  // Corrected form name to `loginForm`
   loginForm: FormGroup = this.fb.group({
-    LoginMethod: [
+    email: [
       null,
-      [Validators.required, Validators.minLength(4), Validators.maxLength(15)],
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
     ],
     password: [
       null,
       [Validators.required, Validators.minLength(5), Validators.maxLength(10)],
     ],
   });
-  data: any;
 
   constructor(private _auth: AuthService) {}
 
-  // Submit the login form
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Login form data:', this.loginForm.value);
 
-      // Call the login service
       this._auth.setlogin(this.loginForm.value).subscribe({
         next: (res) => {
           console.log('Login response:', res);
 
-          if (res && res.StatusCode === 200) {
-            console.log(res.Token);
-            if (res && res.Result && res.Result.Token) {
-              console.log('Token:', res.Result.Token);
-              // Correctly log the token from `Result`
-              this._auth.setToken(res.Result.Token); // Store the token in cookies
-              this.data = this._auth.getToken();
-              console.log('this is my token', this.data);
+          if (res && res.message === 'success') {
+            console.log(res.token);
+            if (res && res.token) {
+              console.log('Token:', res.token);
+              this._auth.setToken(res.token); // Store the token in cookies
               this._auth.saveuserdata();
+              this.router.navigate(['/home']);
             } else {
               console.error('Token is missing in the response.');
             }
-            this.router.navigate(['/home']);
           } else {
             console.error(
               'Login failed:',
@@ -67,8 +60,6 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login failed:', err);
-
-          // Log validation errors if present
           if (err.error?.errors) {
             console.error('Validation errors:', err.error.errors);
           }

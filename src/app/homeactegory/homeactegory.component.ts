@@ -7,19 +7,34 @@ import { ProductService } from '../product.service';
 import { subscribe } from 'diagnostics_channel';
 import { Iproduct } from '../iproduct';
 import { RouterLink } from '@angular/router';
+import { DataService } from '../data.service';
+import { AnypipePipe } from '../anypipe.pipe';
+import { SearchPipe } from '../search.pipe';
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../cart.service';
 // Import the CarouselModule
 
 @Component({
   selector: 'app-homeactegory',
   standalone: true,
-  imports: [CommonModule, CarouselModule, RouterLink], // Add CarouselModule here
+  imports: [
+    CommonModule,
+    CarouselModule,
+    RouterLink,
+    AnypipePipe,
+    SearchPipe,
+    FormsModule,
+  ], // Add CarouselModule here
 
   templateUrl: './homeactegory.component.html',
   styleUrls: ['./homeactegory.component.css'], // Fixed typo in styleUrls
 })
 export class HomeactegoryComponent implements OnInit {
   categoriesList: Icategory[] = []; // Store fetched categories
+  text: string = '';
   private readonly productservice = inject(ProductService);
+  private readonly cart = inject(CartService);
+  data = new Date();
   productlist1: Iproduct[] = [];
   categoryoption: OwlOptions = {
     loop: true,
@@ -81,6 +96,19 @@ export class HomeactegoryComponent implements OnInit {
       next: (res) => {
         this.productlist1 = res.data;
         console.log('product', res.data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  trackByProductId(index: number, product: any): string {
+    return product._id; // Unique identifier for the product
+  }
+  addcart(id: string): void {
+    this.cart.getproducttocart(id).subscribe({
+      next: (res) => {
+        console.log(res);
       },
       error: (err) => {
         console.log(err);
