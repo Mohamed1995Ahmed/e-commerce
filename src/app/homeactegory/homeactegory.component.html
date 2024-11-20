@@ -1,3 +1,5 @@
+{{ data | date : "short" }}
+{{ categoryoption | json }}
 <section>
   <div class="row g-0">
     <div class="col-md-10">
@@ -44,16 +46,35 @@
   <div>Some tags after</div>
 </section>
 <section>
+  <!-- Search Input -->
+  <input
+    [(ngModel)]="text"
+    type="search"
+    placeholder="Search by name"
+    class="form-control mx-auto my-2 w-50"
+  />
+
+  <!-- Product List -->
   <div class="product-list">
-    <div class="product-item" *ngFor="let product of productlist1">
+    <!-- Iterate over products -->
+    <div
+      *ngFor="
+        let product of productlist1 | search : text;
+        trackBy: trackByProductId
+      "
+      class="product-item"
+    >
       <div [routerLink]="['/productdetails', product._id]">
+        <!-- Product Image -->
         <div class="product-image">
           <img [src]="product.imageCover" class="h-50" [alt]="product.title" />
         </div>
+
+        <!-- Product Details -->
         <div class="product-details">
           <h3>{{ product.title }}</h3>
           <p class="product-description">
-            {{ product.description.split(" ", 6).join(" ") }}
+            {{ product.description | anypipe : 6 }}
           </p>
           <div class="product-meta">
             <span class="product-price">Price: ${{ product.price }}</span>
@@ -61,18 +82,18 @@
               >In Stock: {{ product.quantity }}</span
             >
             <span class="product-sold">Sold: {{ product.sold }}</span>
-            <span class="product-rating"
-              >Rating: {{ product.ratingsAverage }} ({{
+            <span class="product-rating">
+              Rating: {{ product.ratingsAverage }} ({{
                 product.ratingsQuantity
               }}
-              reviews)</span
-            >
+              reviews)
+            </span>
           </div>
           <div class="product-category">
-            <strong>Category:</strong> {{ product.category.name }}
+            <strong>Category:</strong> {{ product.category.name | uppercase }}
           </div>
           <div class="product-brand">
-            <strong>Brand:</strong> {{ product.brand.name }}
+            <strong>Brand:</strong> {{ product.brand.name | uppercase }}
           </div>
           <div class="product-subcategories">
             <strong>Subcategories:</strong>
@@ -86,9 +107,16 @@
             <small>Updated: {{ product.updatedAt | date : "medium" }}</small>
           </div>
         </div>
-        <div class="text-center product-card">
-          <button class="btn-primary rounded-3 w-100">Add to Cart</button>
-        </div>
+
+        <!-- Add to Cart Button -->
+      </div>
+      <div class="text-center product-card">
+        <button
+          class="btn-primary rounded-3 w-100"
+          (click)="addcart(product._id)"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   </div>

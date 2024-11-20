@@ -1,57 +1,28 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  <!-- Name -->
   <div>
-    <label for="firstName">First Name</label>
-    <input id="firstName" formControlName="firstName" type="text" />
-    @if(registerForm.get('firstName')?.errors && (
-    registerForm.get('firstName')?.touched)||registerForm.get('firstName')?.dirty){
-    <div class="alert alert-danger w-50">
-      @if(registerForm.get('firstName')?.getError('required')){
-      <p class="m-0">required NAME</p>
-      } @else if (registerForm.get('firstName')?.getError('minLength')){
-      <p class="m-0">min length is 4</p>
-      } @else if(registerForm.get('firstName')?.getError('maxLength') ){
-      <p class="m-0">max length is 16</p>
-      }
+    <label for="name">Full Name</label>
+    <input id="name" formControlName="name" type="text" />
+    <div
+      *ngIf="
+        registerForm.get('name')?.errors &&
+        (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)
+      "
+      class="alert alert-danger w-50"
+    >
+      <div *ngIf="registerForm.get('name')?.getError('required')">
+        <p class="m-0">Name is required</p>
+      </div>
+      <div *ngIf="registerForm.get('name')?.getError('minLength')">
+        <p class="m-0">Min length is 4</p>
+      </div>
+      <div *ngIf="registerForm.get('name')?.getError('maxLength')">
+        <p class="m-0">Max length is 50</p>
+      </div>
     </div>
-
-    }
-  </div>
-  <div>
-    <label for="lastName">Last Name</label>
-    <input id="lastName" formControlName="lastName" type="text" />
-    @if(registerForm.get('lastName')?.errors && (
-    registerForm.get('lastName')?.touched)||registerForm.get('lastName')?.dirty){
-    <div class="alert alert-danger w-50">
-      @if(registerForm.get('lastName')?.getError('required')){
-      <p class="m-0">required NAME</p>
-      } @else if (registerForm.get('lastName')?.getError('minLength')){
-      <p class="m-0">min length is 4</p>
-      } @else if(registerForm.get('lastName')?.getError('maxLength') ){
-      <p class="m-0">max length is 16</p>
-      }
-    </div>
-
-    }
   </div>
 
-  <div>
-    <label for="userName">User Name</label>
-    <input id="userName" formControlName="userName" type="text" />
-    @if(registerForm.get('userName')?.errors && (
-    registerForm.get('userName')?.touched)||registerForm.get('userName')?.dirty){
-    <div class="alert alert-danger w-50">
-      @if(registerForm.get('userName')?.getError('required')){
-      <p class="m-0">required NAME</p>
-      } @else if (registerForm.get('userName')?.getError('minLength')){
-      <p class="m-0">min length is 4</p>
-      } @else if(registerForm.get('userName')?.getError('maxLength') ){
-      <p class="m-0">max length is 16</p>
-      }
-    </div>
-
-    }
-  </div>
-
+  <!-- Email -->
   <div>
     <label for="email">Email</label>
     <input id="email" formControlName="email" type="email" />
@@ -59,49 +30,63 @@
       *ngIf="
         registerForm.get('email')?.invalid && registerForm.get('email')?.touched
       "
+      class="text-danger"
     >
       Please enter a valid email address.
     </small>
   </div>
 
+  <!-- Password -->
   <div>
-    <label for="password">password</label>
-    <input id="password" formControlName="password" type="text" />
-    @if(registerForm.get('password')?.errors && (
-    registerForm.get('password')?.touched)||registerForm.get('password')?.dirty){
-    <div class="alert alert-danger w-50">
-      @if(registerForm.get('password')?.getError('required')){
-      <p class="m-0">required NAME</p>
-      }
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" type="password" />
+    <div
+      *ngIf="
+        registerForm.get('password')?.errors &&
+        (registerForm.get('password')?.touched ||
+          registerForm.get('password')?.dirty)
+      "
+      class="alert alert-danger w-50"
+    >
+      <div *ngIf="registerForm.get('password')?.getError('required')">
+        <p class="m-0">Password is required</p>
+      </div>
     </div>
-
-    }
   </div>
 
+  <!-- Confirm Password -->
   <div>
-    <label for="confirmPassword">Confirm Password</label>
-    <input
-      id="confirmPassword"
-      formControlName="confirmPassword"
-      type="password"
-    />
+    <label for="rePassword">Confirm Password</label>
+    <input id="rePassword" formControlName="rePassword" type="password" />
     <small
       *ngIf="
         registerForm.hasError('mismatch') &&
-        registerForm.get('confirmPassword')?.touched
+        registerForm.get('rePassword')?.touched
       "
+      class="text-danger"
     >
       Passwords must match.
     </small>
   </div>
 
+  <!-- Phone -->
   <div>
-    <label for="role">Role</label>
-    <select id="role" formControlName="role">
-      <option value="Developer">Developer</option>
-      <option value="Mentor">Mentor</option>
-      <option value="HR">HR</option>
-    </select>
+    <label for="phone">Phone</label>
+    <input id="phone" formControlName="phone" type="text" />
+    <div
+      *ngIf="
+        registerForm.get('phone')?.errors &&
+        (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)
+      "
+      class="alert alert-danger w-50"
+    >
+      <div *ngIf="registerForm.get('phone')?.getError('required')">
+        <p class="m-0">Phone number is required</p>
+      </div>
+      <div *ngIf="registerForm.get('phone')?.getError('pattern')">
+        <p class="m-0">Phone number must be 11 digits</p>
+      </div>
+    </div>
   </div>
 
   <button type="submit" [disabled]="registerForm.invalid">Register</button>
